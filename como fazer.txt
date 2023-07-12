@@ -1,0 +1,5 @@
+1 - Fazer o read das entradas locais do campus(1) e caminhos(2)
+2 - Algoritmo para calcular o caminho mais rápido dentre os locais
+3 - Transformar em map code
+
+TODAS EM MAIN
