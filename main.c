@@ -1,6 +1,6 @@
 /* PRECISA:
     I-
-        a) IMPLEMENTAR FLOATS MAIORES PARA ACOMODAR A LAT E LON
+        a) [X]~~ IMPLEMENTAR FLOATS MAIORES PARA ACOMODAR A LAT E LON ~~ [X]
         b) LER DATA 
         c) ENCONTRAR UMA FORMA DE DAR STORE NO LOCAL EM QUESTÃO
            SALVAR NA STRUCT OU COISA DO TIPO, DEPOIS APLICAR AS
@@ -22,15 +22,15 @@
 
 #define MAX_LINE 100
 
-typedef struct{
-    char nome [5];
-    float lat;
-    float lon;
-    char desc [50];
+typedef struct {
+    char nome[5];
+    double lat;
+    double lon;
+    char desc[50];
 } Local;
 
 int main() {
-    FILE *file;
+    FILE* file;
     char linha[MAX_LINE];
 
     file = fopen("locais2.csv", "r");
@@ -40,30 +40,43 @@ int main() {
         return 1;
     }
 
-    Local locais [41];
+    Local locais[41];
     int ler = 0;
     int records = 0;
 
-
     do {
-    ler = fscanf(file,
-    "%4[^,],%f, %f,%49[^,]\n",
-    locais[records].nome, 
-    &locais[records].lat, 
-    &locais[records].lon, 
-    locais[records].desc); records++;
-    } while (fgets(linha, sizeof(linha), file)); // Leitura e bla bla bla, tá lendo tudo tirando um problema na desc, vou ter que usar desc
+        ler = fscanf(file,
+            "%4[^,],%lf,%lf,%49[^\n]\n",
+            locais[records].nome,
+            &locais[records].lat,
+            &locais[records].lon,
+            locais[records].desc);
+
+        if (ler == 3) {
+            // Set desc to an empty string
+            strcpy(locais[records].desc, "");
+        }
+
+        records++;
+    } while (fgets(linha, sizeof(linha), file));
 
     fclose(file);
 
-    printf("Locais e Latitudes Encontradas:\n \n"); // Print Temporario
-    for (int i = 0; i < records; i++)
-        printf("%s %f %f\n", 
-           locais[i].nome, 
-           locais[i].lat,
-           locais[i].lon);
-    
-    printf("\n");
+    printf("Locais e Latitudes Encontradas:\n\n");
+    for (int i = 0; i < records; i++) {
+        if (strlen(locais[i].desc) > 0) {
+            printf("%s %.15lf %.15lf, %s\n",
+                locais[i].nome,
+                locais[i].lat,
+                locais[i].lon,
+                locais[i].desc);
+        } else {
+            printf("%s %.15lf %.15lf\n",
+                locais[i].nome,
+                locais[i].lat,
+                locais[i].lon);
+        }
+    }
 
     return 0;
 }
