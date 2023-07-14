@@ -11,6 +11,13 @@ struct _grafo{
     bool orientado;
 };
 
+typedef struct _vertice *Vertice;
+struct Vertice
+{
+    int valor;
+    
+};
+
 
 Grafo g_cria(int n, bool orientado) {
     Grafo self = malloc(sizeof(*self));

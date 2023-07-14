@@ -1,7 +1,7 @@
 /* PRECISA:
     I-
         a) [X]~~ IMPLEMENTAR FLOATS MAIORES PARA ACOMODAR A LAT E LON ~~ [X]
-        b) LER DATA 
+        b) [X] ~~ LER DATA ~~ [X] (PROVAVEL ERRO, REVISITAR)
         c) ENCONTRAR UMA FORMA DE DAR STORE NO LOCAL EM QUESTÃO
            SALVAR NA STRUCT OU COISA DO TIPO, DEPOIS APLICAR AS
            FORMULAS DO GRAFO 
@@ -46,7 +46,7 @@ int main() {
 
     do {
         ler = fscanf(file,
-            "%4[^,],%lf,%lf,%49[^\n]\n",
+            "%4[^,],%lf,%lf,%49[^]\n",
             locais[records].nome,
             &locais[records].lat,
             &locais[records].lon,
