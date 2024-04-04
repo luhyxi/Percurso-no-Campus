@@ -15,7 +15,7 @@
         a) APLICAR DISJSKRA APARTIR DOS VALORES DA VISITA
         b) RETORNAR O CAMINHO NO FORMATO QUE O BENHUR QUER*/
 
-#include "grafo.h"
+#include "DataStructs/grafo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,11 +29,11 @@ typedef struct {
     char desc[50];
 } Local;
 
-int main() {
+int main(int argc) {
     FILE* file;
     char linha[MAX_LINE];
 
-    file = fopen("locais2.csv", "r");
+    file = fopen("./CSVData/locais.csv", "r");
 
     if (file == NULL) {
         printf("Erro ao abrir arquivo");
