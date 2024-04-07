@@ -13,13 +13,6 @@
 #define MAX_LOCAIS 200
 
 
-struct local{
-	char nome[5];
-	double lat;
-	double lon;
-	char desc[50];
-};
-
 Local *lr_readAndCreateLocais(const char *filename)
 {
 	//>Reading file
@@ -40,6 +33,7 @@ Local *lr_readAndCreateLocais(const char *filename)
 	
 	//>Memory allocation
 	rewind(file);
+	
 	locais = (Local *) malloc(sizeof(Local) * records_read);
 	if (locais == NULL)
 	{
@@ -49,7 +43,6 @@ Local *lr_readAndCreateLocais(const char *filename)
 	}
 	
 	//>Internal logic
-	
 	records_read = 0;
 	while (fgets(linha, MAX_LINE, file) != NULL)
 	{
@@ -104,7 +97,7 @@ Local lr_GetLocalByName(Local *locais, char name[])
 }
 
 /// 'lr_dataReaderTests' tests the implementations
-int lr_dataReaderTests(int argc)
+void lr_dataReaderTests()
 {
 	Local *locais;
 	locais = lr_readAndCreateLocais("/home/luana/CLionProjects/Percurso-no-Campus/src/CSVData/locais.csv");

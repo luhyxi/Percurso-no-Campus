@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 typedef struct _grafo *Grafo;
+typedef struct _vertice *Vertice;
 
 // aloca e inicializa um grafo com n vértices
 // o grafo pode ser orientado ou não (afeta o processamento das arestas) 

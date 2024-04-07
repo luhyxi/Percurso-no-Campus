@@ -15,9 +15,19 @@
         a) APLICAR DISJSKRA APARTIR DOS VALORES DA VISITA
         b) RETORNAR O CAMINHO NO FORMATO QUE O BENHUR QUER*/
 
-#include "src/DataStructs/grafo.h"
 #include "src/DataStructs/locaisReader.h"
+#include "src/DataStructs/caminhosReader.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+int main(int argc)
+{
+	Local *locais;
+	locais = lr_readAndCreateLocais("/home/luana/CLionProjects/Percurso-no-Campus/src/CSVData/locais.csv");
+	Caminho *caminhos;
+	caminhos = cr_readAndCreateCaminhos("/home/luana/CLionProjects/Percurso-no-Campus/src/CSVData/caminhos.csv", locais);
+	
+	lr_dataReaderTests();
+	cr_caminhosReaderTests();
+}

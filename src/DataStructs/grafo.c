@@ -11,9 +11,7 @@ struct _grafo {
 	bool orientado;
 };
 
-typedef struct vertice *Vertice;
-
-struct Vertice {
+struct _vertice {
 	int valor;
 	
 };
