@@ -1,10 +1,10 @@
 //
 //Created by luana on 4/6/24.
 //
-//Standart path for reading => "./CSVData/locais.csv"
+//Standard path for reading => "./CSVData/locais.csv"
 //
 
-#include "dataReader.h"
+#include "locaisReader.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,7 +20,7 @@ struct local{
 	char desc[50];
 };
 
-Local *dr_readAndCreateLocais(const char *filename)
+Local *lr_readAndCreateLocais(const char *filename)
 {
 	//>Reading file
 	FILE *file;
@@ -72,9 +72,9 @@ Local *dr_readAndCreateLocais(const char *filename)
 	return locais;
 }
 
-void dr_freeLocais(Local *locais) { if (locais != NULL) free(locais); }
+void lr_freeLocais(Local *locais) { if (locais != NULL) free(locais); }
 
-int dr_CountLocais(Local *locais)
+int lr_CountLocais(Local *locais)
 {
 	int count = 0;
 	for (int i = 0; i < MAX_LOCAIS; ++i)
@@ -85,13 +85,30 @@ int dr_CountLocais(Local *locais)
 	return count;
 }
 
+void lr_printLocal(Local *l) {
+	printf("Nome: %s\n", l->nome);
+	printf("Latitude: %lf\n", l->lat);
+	printf("Longitude: %lf\n", l->lon);
+	printf("Descrição: %s\n", l->desc);
+}
 
+/// Return the local by the name chosen
+Local lr_GetLocalByName(Local *locais, char name[])
+{
+	for (int i = 0; i < MAX_LOCAIS; ++i)
+	{
+		if (strcmp(locais[i].nome, name) == 0) { return locais[i]; }
+	}
+	Local error = {""}; // Assuming an empty name represents an error
+	return error;
+}
 
-int dr_dataReaderTest(int argc)
+/// 'lr_dataReaderTests' tests the implementations
+int lr_dataReaderTests(int argc)
 {
 	Local *locais;
-	locais = dr_readAndCreateLocais("./CSVData/locais.csv");
-	for (int i = 0; i < 35; i++)
+	locais = lr_readAndCreateLocais("/home/luana/CLionProjects/Percurso-no-Campus/src/CSVData/locais.csv");
+	for (int i = 0; i < lr_CountLocais(locais); i++)
 	{
 		printf("\nLocal %d:\n", i + 1);
 		printf("  Nome: %s\n", locais[i].nome);
@@ -99,7 +116,12 @@ int dr_dataReaderTest(int argc)
 		printf("  Longitude: %lf\n", locais[i].lon);
 		printf("  Descricao: %s\n", locais[i].desc);
 	}
+	printf("\nQuantidade de Locais: %d\n", lr_CountLocais(locais));
 	
+	Local localExistente = lr_GetLocalByName(locais, "memo");
+	Local localInexistente = lr_GetLocalByName(locais, "errado");
 	
-	dr_freeLocais(locais);
+	lr_printLocal(&localExistente);
+	lr_printLocal(&localInexistente);
+	lr_freeLocais(locais);
 }

@@ -15,7 +15,8 @@
         a) APLICAR DISJSKRA APARTIR DOS VALORES DA VISITA
         b) RETORNAR O CAMINHO NO FORMATO QUE O BENHUR QUER*/
 
-#include "DataStructs/grafo.h"
+#include "src/DataStructs/grafo.h"
+#include "src/DataStructs/locaisReader.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
